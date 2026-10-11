@@ -1,0 +1,26 @@
+## Build and Output Binaries
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+publish/
+
+## Visual Studio, JetBrains & VS Code
+.vs/
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Local Crash and Temp Files
+*.tmp
+*.log
+crash.log
+*.lnk
+
+## OS Generated
+Thumbs.db
+[Dd]esktop.ini
+.DS_Store
