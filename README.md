@@ -95,13 +95,12 @@
 ## Project Structure
 
 ```
-C:\Google-Code\MDF\
+MDF-Lens/
 ├── .gitignore                     # Git ignore rules for .NET & Visual Studio
 ├── MDF-Lens.slnx                  # Solution file for Visual Studio / Rider
 ├── README.md                      # Project documentation and screenshot showcase
 ├── CHANGELOG.md                   # Version release notes and change history
-├── Run_MdfLens.cmd                # Double-click launcher script
-├── MDF Lens.lnk                   # Desktop / Workspace shortcut
+├── Run_MdfLens.cmd                # Quick double-click launcher script
 ├── Assets/                        # Application preview screenshots
 │   ├── View1.png                  # Welcome / drag-and-drop start screen
 │   ├── View2.png                  # Studio workspace (Light mode)
@@ -129,29 +128,47 @@ C:\Google-Code\MDF\
 
 ## How to Run MDF Lens
 
-### Option 1: Desktop Shortcut
-Double-click the **MDF Lens** shortcut on your Desktop:
-```
-C:\Users\mjala\Desktop\MDF Lens.lnk
+### Prerequisites
+* **Operating System**: Windows 10 / 11 (64-bit)
+* **Runtime**: [.NET 8.0 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/8.0) (or .NET 8.0 SDK)
+* **SQL Engine (Optional)**: Microsoft SQL Server LocalDB (`MSSQLLocalDB`, included with Visual Studio or SQL Server Express) for live table querying and SQL Studio.
+
+### Option 1: Quick Launcher / Executable
+If you downloaded or cloned the project with pre-built binaries:
+* Double-click **`Run_MdfLens.cmd`** in the repository root folder.
+* Or run the compiled executable directly:
+  ```cmd
+  MdfLens.exe
+  ```
+
+### Option 2: Run via .NET CLI
+Clone the repository and launch directly using the .NET CLI:
+```bash
+# Clone the repository
+git clone https://github.com/mjalaf/MDF-Lens-.git
+cd MDF-Lens-
+
+# Restore and run
+dotnet run --project MdfLens
 ```
 
-### Option 2: Run Launcher
-Double-click `Run_MdfLens.cmd` in the project root:
-```cmd
-C:\Google-Code\MDF\Run_MdfLens.cmd
+### Option 3: Build & Publish Release
+To build an optimized production bundle:
+```bash
+dotnet publish MdfLens -c Release -r win-x64 --self-contained false
 ```
+The compiled output will be located in:
+`MdfLens/bin/Release/net8.0-windows/win-x64/publish/MdfLens.exe`
 
-### Option 3: Direct Executable
-```powershell
-C:\Google-Code\MDF\MdfLens\bin\Release\net8.0-windows\win-x64\publish\MdfLens.exe
-```
+---
 
-### Option 4: From Command Line (.NET CLI)
-```powershell
-dotnet run --project C:\Google-Code\MDF\MdfLens
-```
+### Command-Line Usage (Open on Startup)
+You can directly pass an `.mdf` file path to open and inspect it immediately upon startup:
 
-Or open a specific `.mdf` file directly on launch:
-```powershell
-C:\Google-Code\MDF\MdfLens\bin\Release\net8.0-windows\win-x64\publish\MdfLens.exe "C:\Path\To\Database.mdf"
+```bash
+# Using executable
+MdfLens.exe "C:\path\to\your\database.mdf"
+
+# Using dotnet run
+dotnet run --project MdfLens -- "C:\path\to\your\database.mdf"
 ```
